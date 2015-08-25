@@ -38,7 +38,7 @@
         }
 
         function save() {
-            $GLOBALS['DB']->exec("INSERT INTO students (name, date) VALUES ('{$this->getName()}', '{$this->getDate()}')");
+            $GLOBALS['DB']->exec("INSERT INTO students (name, date) VALUES ('{$this->getName()}', '{$this->getDate()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -81,7 +81,7 @@
         }
 
         function delete() {
-            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM courses_students WHERE student_id = {$this->getId()};");
         }
 
@@ -109,6 +109,11 @@
 
             return $courses_array;
         }
+
+        // function deleteCourse()
+        // {
+        //
+        // }
             // $query = $GLOBALS['DB']->query("SELECT course_id FROM courses_students WHERE student_id = {$this->getId()};");
             // $course_ids = $query->fetchAll(PDO::FETCH_ASSOC);
             //

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Edit {{ student.getName }}</title>
+    </head>
+    <body>
+        <h1>Edit {{ student.getName }}</h1>
+
+        <form action="/students/{{ student.getId }}" method="post">
+            <input name="_method" type="hidden" value="patch">
+            <label for="name">Enter new Name:</label>
+            <input name="name" type="text" value="{{ student.getName }}">
+            <label for="date">Enter new Enrollment Date:</label>
+            <input name="date" type="text" value="{{ student.getDate }}">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <form action="/students/{{ student.getId }}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete Student</button>
+        </form>
+
+        <form action="/students/{{ student.getId }}">
+            <button type="submit">Back</button>
+        </form>
+    </body>
+</html>

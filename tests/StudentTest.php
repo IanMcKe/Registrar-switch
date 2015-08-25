@@ -253,12 +253,6 @@
         function testDelete()
         {
             //Arrange
-            $name = "Math";
-            $course_num = "101";
-            $id = 1;
-            $test_course = new Course($name, $course_num, $id);
-            $test_course->save();
-
             $name = "Rick";
             $date = "2015-08-15";
             $id = 1;
@@ -266,11 +260,11 @@
             $test_student->save();
 
             //Act
-            $test_student->addCourse($test_course);
             $test_student->delete();
+            $result = Student::getAll();
 
             //Assert
-            $this->assertEquals([], $test_course->getStudents());
+            $this->assertEquals([], $result);
         }
 
     }
