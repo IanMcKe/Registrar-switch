@@ -2,7 +2,7 @@
 
 ##### App that allows users to create courses and students. (8/25/15)
 
-#### Brian Borealis & Steve Smietana
+#### Brian Borealis & Steve Smietana & Ian McKenney & Jason Bethel
 
 ## Description
 
@@ -24,7 +24,7 @@ PHP, PHPUnit, Silex, Twig, and MySQL
 
 ### Legal
 
-Copyright (c) 2015 Brian Borealis $  Steve Smietana
+Copyright (c) 2015 Brian Borealis $  Steve Smietana & Ian McKenney & Jason Bethel
 
 This software is licensed under the MIT license.
 
