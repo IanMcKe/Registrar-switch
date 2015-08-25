@@ -92,23 +92,39 @@
 
         function getStudents()
         {
-            $query = $GLOBALS['DB']->query("SELECT student_id FROM courses_students WHERE course_id = {$this->getId()};");
-            $student_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+            //Trying JOIN - not working
+            $query = $GLOBALS['DB']->query("SELECT students.* FROM courses JOIN courses_students ON (courses.id = courses_students.course_id) JOIN students ON (courses_students.student_id = students.id) WHERE courses.id = {$this->getId()};");
+            $students = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            $students = array();
-            foreach($student_ids as $id) {
-                $student_id = $id['student_id'];
-                $result = $GLOBALS['DB']->query("SELECT * FROM students WHERE id = {$student_id};");
-                $returned_student = $result->fetchAll(PDO::FETCH_ASSOC);
+            $students_array = array();
 
-                $name = $returned_student[0]['name'];
-                $id = $returned_student[0]['id'];
-                $date = $returned_student[0]['date'];
-
+            foreach($students as $student) {
+                $name = $students[0]['name'];
+                $date = $students[0]['date'];
+                $id = $students[0]['id'];
                 $new_student = new Student($name, $date, $id);
-                array_push($students, $new_student);
+                array_push($students_array, $new_student);
             }
-            return $students;
+            return $students_array;
+
+            //Function with old method that works
+            // $query = $GLOBALS['DB']->query("SELECT student_id FROM courses_students WHERE course_id = {$this->getId()};");
+            // $student_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+            //
+            // $students = array();
+            // foreach($student_ids as $id) {
+            //     $student_id = $id['student_id'];
+            //     $result = $GLOBALS['DB']->query("SELECT * FROM students WHERE id = {$student_id};");
+            //     $returned_student = $result->fetchAll(PDO::FETCH_ASSOC);
+            //
+            //     $name = $returned_student[0]['name'];
+            //     $id = $returned_student[0]['id'];
+            //     $date = $returned_student[0]['date'];
+            //
+            //     $new_student = new Student($name, $date, $id);
+            //     array_push($students, $new_student);
+            // }
+            // return $students;
         }
 
 
