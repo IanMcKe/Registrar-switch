@@ -5,6 +5,7 @@
     */
 
     require_once "src/Student.php";
+    require_once "src/Course.php";
 
 
     $server = 'mysql:host=localhost;dbname=registrar_test';
@@ -17,6 +18,7 @@
         protected function tearDown()
         {
             Student::deleteAll();
+            Course::deleteAll();
         }
 
         function testGetName()
@@ -195,6 +197,82 @@
 
             //Assert
             $this->assertEquals($test_student2, $result);
+        }
+
+        function testAddCourse()
+        {
+            //Arrange
+            $name = "Math";
+            $course_num = "101";
+            $id = 1;
+            $test_course = new Course($name, $course_num, $id);
+            $test_course->save();
+
+            $name = "Rick";
+            $date = "2015-08-15";
+            $id = 1;
+            $test_student = new Student($name, $date, $id);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(),[$test_course]);
+        }
+
+        function testGetCourses()
+        {
+            //Arrange
+            $name = "Math";
+            $course_num = "101";
+            $id = 1;
+            $test_course = new Course($name, $course_num, $id);
+            $test_course->save();
+
+            $name2 = "English";
+            $course_num2 = "200";
+            $id2 = 2;
+            $test_course2 = new Course($name2, $course_num2, $id2);
+            $test_course2->save();
+
+            $name = "Rick";
+            $date = "2015-08-15";
+            $id = 1;
+            $test_student = new Student($name, $date, $id);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->addCourse($test_course2);
+
+            $result = $test_student->getCourses();
+
+            //Assert
+            $this->assertEquals([$test_course, $test_course2], $result);
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $name = "Math";
+            $course_num = "101";
+            $id = 1;
+            $test_course = new Course($name, $course_num, $id);
+            $test_course->save();
+
+            $name = "Rick";
+            $date = "2015-08-15";
+            $id = 1;
+            $test_student = new Student($name, $date, $id);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->delete();
+
+            //Assert
+            $this->assertEquals([], $test_course->getStudents());
         }
 
     }
