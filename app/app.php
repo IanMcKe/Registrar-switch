@@ -74,7 +74,7 @@
         $course = Course::find($_POST['course_id']);
         $student = Student::find($_POST['student_id']);
         $student->addCourse($course);
-        return $app['twig']->render('student.html.twig', array('student' => $student, 'courses' => $courses->getStudents(), 'all_courses' => Course::getAll()));
+        return $app['twig']->render('student.html.twig', array('student' => $student, 'courses' => $student->getCourses(), 'all_courses' => Course::getAll()));
     });
 
     //pages for all courses
