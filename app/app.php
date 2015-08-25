@@ -8,7 +8,7 @@
 
     $app['debug']=true;
 
-    $server = 'mysql:host=localhost;dbname=to_do';
+    $server = 'mysql:host=localhost;dbname=registrar';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -19,5 +19,14 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
+
+    $app->get("/", function() use($app) {
+        return $app['twig']->render('index.html.twig', array('courses' => Course::getAll(), 'students' => Student::getAll()));
+    });
+
+    
+
+
+    return $app;
 
  ?>

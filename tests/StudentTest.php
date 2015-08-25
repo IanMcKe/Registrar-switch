@@ -204,14 +204,12 @@
             //Arrange
             $name = "Math";
             $course_num = "101";
-            $id = 1;
-            $test_course = new Course($name, $course_num, $id);
+            $test_course = new Course($name, $course_num);
             $test_course->save();
 
             $name = "Rick";
             $date = "2015-08-15";
-            $id = 1;
-            $test_student = new Student($name, $date, $id);
+            $test_student = new Student($name, $date);
             $test_student->save();
 
             //Act
