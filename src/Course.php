@@ -95,19 +95,19 @@
             //Trying JOIN - not working
             $query = $GLOBALS['DB']->query("SELECT students.* FROM courses JOIN courses_students ON (courses.id = courses_students.course_id) JOIN students ON (courses_students.student_id = students.id) WHERE courses.id = {$this->getId()};");
             $students = $query->fetchAll(PDO::FETCH_ASSOC);
-
             $students_array = array();
 
             foreach($students as $student) {
-                $name = $students[0]['name'];
-                $date = $students[0]['date'];
-                $id = $students[0]['id'];
+                $name = $student['name'];
+                $date = $student['date'];
+                $id = $student['id'];
                 $new_student = new Student($name, $date, $id);
                 array_push($students_array, $new_student);
             }
             return $students_array;
 
             //Function with old method that works
+
             // $query = $GLOBALS['DB']->query("SELECT student_id FROM courses_students WHERE course_id = {$this->getId()};");
             // $student_ids = $query->fetchAll(PDO::FETCH_ASSOC);
             //
